@@ -33,10 +33,10 @@ public abstract class HP : MonoBehaviour
     {
         switch (attack.debuffType)
         {
-            case DebuffType.Freeze: MoveObj.canMove = false; MoveObj.timeCantMove = attack.timeFreeze; break;
+            case DebuffType.Freeze: StartCoroutine(MoveObj.Freeze(attack.timeFreeze)); break;
             case DebuffType.Weakness: AttackObj.weakness = attack.weakness; break;
             case DebuffType.Poison: break;
-//            case DebuffType.Slow: MoveObj.slowdownPower = attack.; break;
+         //  case DebuffType.Slow: MoveObj.slowdownPower = attack.; break;
             default: break;
         }
     }

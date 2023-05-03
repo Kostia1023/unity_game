@@ -655,7 +655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &764459700
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1150,7 +1150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1706424400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,6 +1163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c660e538100503a40b826b03e7acd310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 1
+  timeCantMove: 0
+  slowdownTime: 0
+  slowdownPower: 0
   speed: 5
   boostMultiplier: 2
 --- !u!54 &1706424401
@@ -1252,7 +1256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706424399}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.2, z: 0}
+  m_LocalPosition: {x: 0, y: 11.59, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1272,6 +1276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
+  MoveObj: {fileID: 0}
 --- !u!1 &2003524366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,6 +1288,7 @@ GameObject:
   - component: {fileID: 2003524369}
   - component: {fileID: 2003524368}
   - component: {fileID: 2003524367}
+  - component: {fileID: 2003524370}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1340,3 +1346,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2003524370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003524366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23957d35bd836754a943b859d642fba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 6651768045631384872, guid: 8d8016d25b87b744b99b1ddcc2c60d43, type: 3}
+  cellEnemyMaterial: {fileID: 2100000, guid: bec825070dffcc840b75d7ba7069f6c0, type: 2}
+  cellNoneMaterial: {fileID: 2100000, guid: 12042564074002741b648a7b20ab5343, type: 2}
+  cellPlayerMaterial: {fileID: 2100000, guid: 91d1916b0c343d844bd2a548b871926b, type: 2}
+  cellChestMaterial: {fileID: 2100000, guid: 624eb7ea53341c644a86b977270aa8e8, type: 2}
+  cellHomeMaterial: {fileID: 2100000, guid: 5ec460bd00d2e334c9e61a92c8790518, type: 2}
+  cellForestMaterial: {fileID: 2100000, guid: ffb3ceda9d1f7e04d827c8521610598a, type: 2}
+  seed: 1
+  noneWeight: 1122
+  enemyWeight: 1122
+  chestWeight: 1122
+  homeWeight: 1122
+  forestWeight: 1122
+  playerWeight: 1122
+  sizeWorld: 1

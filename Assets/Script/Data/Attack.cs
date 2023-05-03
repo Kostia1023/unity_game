@@ -19,7 +19,7 @@ public class AttackData
     public DebuffType debuffType;
 }
 
-public class Attack
+public class Attack : MonoBehaviour
 {
     public float damage = 0f;
     public float knockback = 0f;

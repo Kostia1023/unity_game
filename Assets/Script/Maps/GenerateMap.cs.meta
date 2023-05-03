@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 23957d35bd836754a943b859d642fba2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - enemy: {instanceID: 0}
+  - cellEnemyMaterial: {instanceID: 0}
+  - cellNoneMaterial: {instanceID: 0}
+  - cellPlayerMaterial: {instanceID: 0}
+  - cellChestMaterial: {instanceID: 0}
+  - cellHomeMaterial: {instanceID: 0}
+  - cellForestMaterial: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
