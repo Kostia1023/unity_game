@@ -15,17 +15,17 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
 
-        healthSlider.value = 1f;
+       // healthSlider.value = 1f;
     }
 
     void FixedUpdate()
     {
-        healthSlider.value = GetPlayerHealth();
-        if (Time.time - lastTakedDamage > timeInvulnerability)
-        {
+        //healthSlider.value = GetPlayerHealth();
+        //if (Time.time - lastTakedDamage > timeInvulnerability)
+        //{
             
-            lastTakedDamage = Time.time;
-        }
+        //    lastTakedDamage = Time.time;
+        //}
     }
 
     void getAttacked(Attack attack)

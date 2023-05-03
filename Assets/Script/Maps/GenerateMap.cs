@@ -1,12 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GenerateMap : MonoBehaviour
 {
-    [SerializeField]
-    GameObject enemy;
-
+    //Material
     [SerializeField]
     public Material cellEnemyMaterial;
     [SerializeField]
@@ -22,6 +23,8 @@ public class GenerateMap : MonoBehaviour
     [SerializeField]
     private int seed = 1122;
 
+
+    //Weight
     [SerializeField]
     private int noneWeight = 9;
     [SerializeField]
@@ -33,13 +36,26 @@ public class GenerateMap : MonoBehaviour
     [SerializeField]
     private int forestWeight = 5;
 
+    //Prefabs
+    [SerializeField]
+    GameObject playerPrefab;
+    [SerializeField]
+    GameObject enemyPrefab;
+    [SerializeField]
+    GameObject chestPrefab;
+    [SerializeField]
+    GameObject groundPrefab;
 
-    public WorldSize sizeWorld;
 
+    //Rand
     System.Random randMain;
     System.Random random = new System.Random();
 
-    private int cellSize = 35;
+
+    //Size
+    public WorldSize sizeWorld;
+
+    private int cellSize = 25;
 
     private int smallSizeWidth = 10;
     private int smallSizeHeight = 10;
@@ -51,8 +67,15 @@ public class GenerateMap : MonoBehaviour
     private float maxWidth;
     private float maxHeight;
 
+    //World params
+    private int maxCountEnemyInCell = 10;
+    private int minCountEnemyInCell = 4;
+    private int maxCountChestInCell = 4;
+    private int minCountChestInCell = 1;
+
     private void Start()
     {
+
         randMain = new System.Random(seed);
         GenerateWorld();
     }
@@ -115,42 +138,137 @@ public class GenerateMap : MonoBehaviour
 
                 GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 cube.transform.localScale = new Vector3(cellSize, 1, cellSize);
-                cube.transform.position = new Vector3(i * cellSize - maxWidth + i, 0, j * cellSize - maxHeight + j);
+                cube.transform.position = new Vector3(i * cellSize - maxWidth, 0, j * cellSize - maxHeight);
                 switch (typeCells[i, j])
                 {
                     case TypeCell.None:
-                        cube.GetComponent<Renderer>().material = cellNoneMaterial;
+                        CreateNoneCell(i, j);
                         break;
                     case TypeCell.Enemy:
-                        cube.GetComponent<Renderer>().material = cellEnemyMaterial;
+                        CreateEnemyCell(i, j);
                         break;
                     case TypeCell.Chest:
-                        cube.GetComponent<Renderer>().material = cellChestMaterial;
+                        CreateChestCell(i, j);
                         break;
                     case TypeCell.Home:
-                        cube.GetComponent<Renderer>().material = cellHomeMaterial;
+                        CreateHomeCell(i, j);
                         break;
                     case TypeCell.Forest:
-                        cube.GetComponent<Renderer>().material = cellForestMaterial;
+                        CreateForestCell(i, j);
                         break;
                     case TypeCell.Player:
-                        cube.GetComponent<Renderer>().material = cellPlayerMaterial;
+                        CreatePlayerCell(i, j);
                         break;
                 }
             }
         }
     }
 
-    void CreatePlayerCell(int width, int height)
+    void CreatePlayerCell(int widthPos, int heightPos)
     {
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.localScale = new Vector3(cellSize, 1, cellSize);
-        cube.transform.position = new Vector3(width * cellSize - maxWidth + width, 0, height * cellSize - maxHeight + height);
+        GameObject cube = createDemoCube(widthPos, heightPos, out float[] position);
         cube.GetComponent<Renderer>().material = cellPlayerMaterial;
-
-
+        GameObject player = Instantiate(playerPrefab, new Vector3(widthPos * cellSize - maxWidth, 1, heightPos * cellSize - maxHeight), Quaternion.identity);
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>().target = player.transform;
 
     }
 
+    void CreateEnemyCell(int widthPos, int heightPos)
+    {
+        GameObject cube = createDemoCube(widthPos, heightPos, out float[] position);
+        cube.GetComponent<Renderer>().material = cellEnemyMaterial;
+        int numberEnemies = randMain.Next(minCountEnemyInCell, maxCountEnemyInCell + 1);
+        int[] enemysCenterPos = {
+            randMain.Next(Convert.ToInt32(position[0] - cellSize / 2 + 5), Convert.ToInt32(position[0] + cellSize / 2 - 5)),
+            randMain.Next(Convert.ToInt32(position[1] - cellSize / 2 + 5), Convert.ToInt32(position[1] + cellSize / 2 - 5)),
+        };
+
+        List<int[]> enemysPos = new List<int[]>();
+
+        for (int i = 2; i < numberEnemies + 2; i++)
+        {
+
+            while (true)
+            {
+                int[] pos = new int[] {
+                    randMain.Next(Convert.ToInt32(enemysCenterPos[0] - i), Convert.ToInt32(enemysCenterPos[0] + i)),
+                    randMain.Next(Convert.ToInt32(enemysCenterPos[1] - i), Convert.ToInt32(enemysCenterPos[1] + i))
+                };
+
+                if (isPossiblePlace(enemysPos, pos))
+                {
+                    Instantiate(playerPrefab, new Vector3(
+                        pos[0],
+                        1,
+                        pos[1]
+                        ), Quaternion.identity);
+                    enemysPos.Add(pos);
+                    break;
+                }
+            }
+
+        }
+    }
+
+    bool isPossiblePlace(List<int[]> positions, int[] position)
+    {
+        foreach (int[] pos in positions)
+        {
+            if ((position[0] + 2 >= pos[0] && position[0] - 2 <= pos[0]) && (position[1] + 2 >= pos[1] && position[1] - 2 <= pos[1]))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void CreateChestCell(int widthPos, int heightPos)
+    {
+        GameObject cube = createDemoCube(widthPos, heightPos, out float[] position);
+        cube.GetComponent<Renderer>().material = cellChestMaterial;
+        int numberChests = randMain.Next(minCountChestInCell, maxCountChestInCell + 1);
+        int R = randMain.Next(4, 9);
+        int Deg = randMain.Next(120, 360);
+        PlaceChest(numberChests, R, Deg, new Vector3(position[0], 0, position[1]));
+
+    }
+
+    void PlaceChest(int n, float R, float Deg, Vector3 center)
+    {
+
+        float angle = Deg / n;
+
+        for (int i = 0; i < n; i++)
+        {
+            float x = center.x + R * Mathf.Sin(angle * i * Mathf.Deg2Rad);
+            float z = center.z + R * Mathf.Cos(angle * i * Mathf.Deg2Rad);
+
+            Vector3 pos = new Vector3(x, 0.5f, z);
+            Instantiate(chestPrefab, pos, Quaternion.identity);
+        }
+    }
+
+    GameObject createDemoCube(int widthPos, int heightPos, out float[] position)
+    {
+        position = new float[] { widthPos * cellSize - maxWidth, heightPos * cellSize - maxHeight };
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.transform.localScale = new Vector3(cellSize, 1, cellSize);
+        cube.transform.position = new Vector3(position[0], 0, position[1]);
+        return cube;
+    }
+
+    void CreateNoneCell(int widthPos, int heightPos)
+    {
+
+    }
+
+    void CreateHomeCell(int widthPos, int heightPos)
+    {
+
+    }
+    void CreateForestCell(int widthPos, int heightPos)
+    {
+
+    }
 
 }
