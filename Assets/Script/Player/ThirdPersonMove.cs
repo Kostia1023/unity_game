@@ -7,7 +7,7 @@ public class ThirdPersonMove : MonoBehaviour
     public CharacterController characterController;
     public Transform cam;
     public float speed = 5f;
-    public float rotTime = 0.1f;
+    public float rotTime = 5f;
     private void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
