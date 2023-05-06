@@ -9,5 +9,5 @@ public enum WorldSize
 
 public enum TypeCell
 {
-    None, Enemy, Chest, Home, Forest, Player
+    None, Enemy, Chest, Homes, Forest, Player
 }

@@ -27,3 +27,19 @@ public static class GameData
         return PlayerPrefs.HasKey(key);
     }
 }
+
+public class Forest{
+    public void Create(float[] pos, int cellSize, System.Random random)
+    {
+
+    }
+}
+
+public class Homes
+{
+    public void Create(float[] pos, int cellSize, System.Random random)
+    {
+
+    }
+}
+

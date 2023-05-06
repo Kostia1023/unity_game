@@ -17,7 +17,7 @@ public class GenerateMap : MonoBehaviour
     [SerializeField]
     public Material cellChestMaterial;
     [SerializeField]
-    public Material cellHomeMaterial;
+    public Material cellHomesMaterial;
     [SerializeField]
     public Material cellForestMaterial;
     [SerializeField]
@@ -32,7 +32,7 @@ public class GenerateMap : MonoBehaviour
     [SerializeField]
     private int chestWeight = 1;
     [SerializeField]
-    private int homeWeight = 3;
+    private int homesWeight = 3;
     [SerializeField]
     private int forestWeight = 5;
 
@@ -93,6 +93,7 @@ public class GenerateMap : MonoBehaviour
     TypeCell[,] CreateBaseGrid(int width, int height)
     {
         int[] spawn = { randMain.Next(width / 2 - 2, width / 2 + 3), randMain.Next(height / 2 - 2, height / 2 + 3) };
+        int maxWeight = noneWeight + enemyWeight + chestWeight + homesWeight + forestWeight;
         TypeCell[,] mapGrid = new TypeCell[width, height];
         for (int i = 0; i < width; i++)
         {
@@ -108,16 +109,16 @@ public class GenerateMap : MonoBehaviour
                     mapGrid[i, j] = TypeCell.None;
                     continue;
                 }
-                switch (randMain.Next(0, 20))
+                switch (randMain.Next(0, maxWeight))
                 {
-                    case int n when (n < 9):
+                    case int n when (n < noneWeight):
                         mapGrid[i, j] = TypeCell.None; break;
-                    case int n when (n < 11):
+                    case int n when (n < enemyWeight):
                         mapGrid[i, j] = TypeCell.Enemy; break;
-                    case int n when (n < 12):
+                    case int n when (n < chestWeight):
                         mapGrid[i, j] = TypeCell.Chest; break;
-                    case int n when (n < 15):
-                        mapGrid[i, j] = TypeCell.Home; break;
+                    case int n when (n < homesWeight):
+                        mapGrid[i, j] = TypeCell.Homes; break;
                     default:
                         mapGrid[i, j] = TypeCell.Forest; break;
                 }
@@ -135,7 +136,6 @@ public class GenerateMap : MonoBehaviour
         {
             for (int j = 0; j < typeCells.GetLength(1); j++)
             {
-
                 GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 cube.transform.localScale = new Vector3(cellSize, 1, cellSize);
                 cube.transform.position = new Vector3(i * cellSize - maxWidth, 0, j * cellSize - maxHeight);
@@ -150,8 +150,8 @@ public class GenerateMap : MonoBehaviour
                     case TypeCell.Chest:
                         CreateChestCell(i, j);
                         break;
-                    case TypeCell.Home:
-                        CreateHomeCell(i, j);
+                    case TypeCell.Homes:
+                        CreateHomesCell(i, j);
                         break;
                     case TypeCell.Forest:
                         CreateForestCell(i, j);
@@ -170,7 +170,6 @@ public class GenerateMap : MonoBehaviour
         cube.GetComponent<Renderer>().material = cellPlayerMaterial;
         GameObject player = Instantiate(playerPrefab, new Vector3(widthPos * cellSize - maxWidth, 1, heightPos * cellSize - maxHeight), Quaternion.identity);
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>().target = player.transform;
-
     }
 
     void CreateEnemyCell(int widthPos, int heightPos)
@@ -259,16 +258,22 @@ public class GenerateMap : MonoBehaviour
 
     void CreateNoneCell(int widthPos, int heightPos)
     {
-
+        GameObject cube = createDemoCube(widthPos, heightPos, out float[] position);
+        cube.GetComponent<Renderer>().material = cellNoneMaterial;
     }
 
-    void CreateHomeCell(int widthPos, int heightPos)
+    void CreateHomesCell(int widthPos, int heightPos)
     {
-
+        GameObject cube = createDemoCube(widthPos, heightPos, out float[] position);
+        cube.GetComponent<Renderer>().material = cellHomesMaterial;
+        Homes homes = new();
+        homes.Create(position, cellSize, randMain);
     }
     void CreateForestCell(int widthPos, int heightPos)
     {
-
+        GameObject cube = createDemoCube(widthPos, heightPos, out float[] position);
+        cube.GetComponent<Renderer>().material = cellForestMaterial;
+        Forest forest = new();
+        forest.Create(position, cellSize, randMain);
     }
-
 }
