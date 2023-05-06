@@ -43,8 +43,6 @@ public class GenerateMap : MonoBehaviour
     GameObject enemyPrefab;
     [SerializeField]
     GameObject chestPrefab;
-    [SerializeField]
-    GameObject groundPrefab;
 
 
     //Rand
@@ -169,7 +167,7 @@ public class GenerateMap : MonoBehaviour
         GameObject cube = createDemoCube(widthPos, heightPos, out float[] position);
         cube.GetComponent<Renderer>().material = cellPlayerMaterial;
         GameObject player = Instantiate(playerPrefab, new Vector3(widthPos * cellSize - maxWidth, 1, heightPos * cellSize - maxHeight), Quaternion.identity);
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>().target = player.transform;
+        player.GetComponent<ThirdPersonMove>().cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     void CreateEnemyCell(int widthPos, int heightPos)
