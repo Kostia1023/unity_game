@@ -168,6 +168,7 @@ public class GenerateMap : MonoBehaviour
         cube.GetComponent<Renderer>().material = cellPlayerMaterial;
         GameObject player = Instantiate(playerPrefab, new Vector3(widthPos * cellSize - maxWidth, 1, heightPos * cellSize - maxHeight), Quaternion.identity);
         player.GetComponent<ThirdPersonMove>().cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>().target = player.transform;
     }
 
     void CreateEnemyCell(int widthPos, int heightPos)
