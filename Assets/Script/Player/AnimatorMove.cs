@@ -10,6 +10,5 @@ public class AnimatorMove : MonoBehaviour
     {
         anim.SetFloat("vertical", Input.GetAxis("Vertical"));
         anim.SetFloat("horizontal", Input.GetAxis("Horizontal"));
-
     }
 }
