@@ -7,6 +7,8 @@ public class EnemyMovement : MoveController
     public float radius = 10;
     public string targetTag = "Player";
 
+    public CharacterController characterController;
+
     private GameObject target;
 
     private void Start()
@@ -41,17 +43,8 @@ public class EnemyMovement : MoveController
             {
                 // Move towards target
                 Vector3 direction = (target.transform.position - transform.position).normalized;
-                Move(direction.x, direction.z);
+                characterController.Move(getSpeed(direction));
             }
         }
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        Attack attack = gameObject.GetComponent<EnemyAttack>();
-    //        attack.ToAttack(other.gameObject.GetComponent<HP>());
-    //    }
-    //}
 }

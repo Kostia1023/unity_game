@@ -896,8 +896,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 170346361}
   cam: {fileID: 0}
-  speed: 5
+  speed: 10
   rotTime: 0.5
+  rotSpeed: 5
 --- !u!114 &465931695853418248
 MonoBehaviour:
   m_ObjectHideFlags: 0
