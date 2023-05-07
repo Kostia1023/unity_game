@@ -38,11 +38,11 @@ public class GenerateMap : MonoBehaviour
 
     //Prefabs
     [SerializeField]
-    GameObject playerPrefab;
+    public GameObject playerPrefab;
     [SerializeField]
-    GameObject enemyPrefab;
+    public GameObject enemyPrefab;
     [SerializeField]
-    GameObject chestPrefab;
+    public GameObject chestPrefab;
 
 
     //Rand
@@ -53,7 +53,7 @@ public class GenerateMap : MonoBehaviour
     //Size
     public WorldSize sizeWorld;
 
-    private int cellSize = 25;
+    public int cellSize = 25;
 
     private int smallSizeWidth = 10;
     private int smallSizeHeight = 10;
@@ -111,11 +111,11 @@ public class GenerateMap : MonoBehaviour
                 {
                     case int n when (n < noneWeight):
                         mapGrid[i, j] = TypeCell.None; break;
-                    case int n when (n < enemyWeight):
+                    case int n when (n < noneWeight + enemyWeight):
                         mapGrid[i, j] = TypeCell.Enemy; break;
-                    case int n when (n < chestWeight):
+                    case int n when (n < noneWeight + enemyWeight + chestWeight):
                         mapGrid[i, j] = TypeCell.Chest; break;
-                    case int n when (n < homesWeight):
+                    case int n when (n < noneWeight + enemyWeight + chestWeight + homesWeight):
                         mapGrid[i, j] = TypeCell.Homes; break;
                     default:
                         mapGrid[i, j] = TypeCell.Forest; break;
