@@ -354,18 +354,18 @@ public class GenerateMap : MonoBehaviour
                     switch (randMain.Next(0, 3))
                     {
                         case 0:
-                            tree = Instantiate(TreePrefab1, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                            tree = TreePrefab1;
                             break;
                         case 1:
-                            tree = Instantiate(TreePrefab2, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                            tree = TreePrefab2;
                             break;
                         case 2:
-                            tree = Instantiate(TreePrefab3, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                            tree = TreePrefab3;
                             break;
                     }
                     Instantiate(tree, new Vector3(
                         pos[0],
-                        1,
+                        0,
                         pos[1]
                         ), Quaternion.identity);
                     treesPos.Add(pos);
@@ -464,10 +464,10 @@ public class GenerateMap : MonoBehaviour
             switch (randMain.Next(0, 2))
             {
                 case 0:
-                    Instantiate(RockWall1, new Vector3(-(maxWidth + cellSize / 2), 0, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
+                    Instantiate(RockWall1, new Vector3(-(maxWidth + cellSize / 2), 1, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
                     break;
                 case 1:
-                    Instantiate(RockWall2, new Vector3(-(maxWidth + cellSize / 2), 0, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
+                    Instantiate(RockWall2, new Vector3(-(maxWidth + cellSize / 2), 1, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
                     break;
             }
         }
@@ -476,10 +476,10 @@ public class GenerateMap : MonoBehaviour
             switch (randMain.Next(0, 2))
             {
                 case 0:
-                    Instantiate(RockWall1, new Vector3((maxWidth - cellSize / 2), 0, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
+                    Instantiate(RockWall1, new Vector3((maxWidth - cellSize / 2), 1, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
                     break;
                 case 1:
-                    Instantiate(RockWall2, new Vector3((maxWidth - cellSize / 2), 0, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
+                    Instantiate(RockWall2, new Vector3((maxWidth - cellSize / 2), 1, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
                     break;
             }
         }
