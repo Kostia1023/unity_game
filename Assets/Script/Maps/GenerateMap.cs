@@ -68,7 +68,10 @@ public class GenerateMap : MonoBehaviour
     GameObject PlantsPrefab1;
     [SerializeField]
     GameObject PlantsPrefab2;
-
+    [SerializeField]
+    GameObject RockWall1;
+    [SerializeField]
+    GameObject RockWall2;
 
     //Rand
     System.Random randMain;
@@ -188,6 +191,7 @@ public class GenerateMap : MonoBehaviour
             }
         }
         CreateGrassAndFlowers(width, height);
+        GenerateWalls(width, height);
     }
 
     void CreatePlayerCell(int widthPos, int heightPos)
@@ -294,16 +298,29 @@ public class GenerateMap : MonoBehaviour
     {
         GameObject cube = createDemoCube(widthPos, heightPos, out float[] position);
         cube.GetComponent<Renderer>().material = cellHomesMaterial;
+        Quaternion quaternion = Quaternion.identity;
         switch (randMain.Next(0, 3))
         {
             case 0:
-                Instantiate(HomesPrefab1, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                quaternion = Quaternion.Euler(0f, 90f, 0f);
                 break;
             case 1:
-                Instantiate(HomesPrefab2, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                quaternion = Quaternion.Euler(0f, 180f, 0f);
                 break;
             case 2:
-                Instantiate(HomesPrefab3, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                quaternion = Quaternion.Euler(0f, -90f, 0f);
+                break;
+        }
+        switch (randMain.Next(0, 3))
+        {
+            case 0:
+                Instantiate(HomesPrefab1, new Vector3(position[0], 0, position[1]), quaternion);
+                break;
+            case 1:
+                Instantiate(HomesPrefab2, new Vector3(position[0], 0, position[1]), quaternion);
+                break;
+            case 2:
+                Instantiate(HomesPrefab3, new Vector3(position[0], 0, position[1]), quaternion);
                 break;
         }
 
@@ -361,15 +378,15 @@ public class GenerateMap : MonoBehaviour
 
     void CreateGrassAndFlowers(int width, int height)
     {
-        for (int i = 0; i < width * cellSize-2; i += 2)
+        for (int i = 0; i < width * cellSize - 2; i += 2)
         {
-            for (int j = 0; j < height * cellSize-3; j += 3)
+            for (int j = 0; j < height * cellSize - 3; j += 3)
             {
                 if (!CheckPlacement()) { continue; }
                 Vector3 position = new Vector3(
-                    (float)randMain.NextDouble() * 2 + i - maxWidth, 
+                    (float)randMain.NextDouble() * 2 + i - maxWidth - cellSize / 2,
                     0,
-                    (float)randMain.NextDouble() * 3 + j - maxHeight);
+                    (float)randMain.NextDouble() * 3 + j - maxHeight - cellSize / 2);
                 switch (randMain.Next(0, 15))
                 {
                     case 0:
@@ -414,4 +431,57 @@ public class GenerateMap : MonoBehaviour
         }
     }
 
+    void GenerateWalls(int width, int height)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            switch (randMain.Next(0, 2))
+            {
+                case 0:
+                    Instantiate(RockWall1, new Vector3(j * cellSize - maxWidth, 0,-(maxHeight + cellSize / 2)), Quaternion.identity);
+                    break;
+                case 1:
+                    Instantiate(RockWall2, new Vector3(j * cellSize - maxWidth, 0, -(maxHeight + cellSize / 2)), Quaternion.identity);
+                    break;
+            }
+
+        }
+        for (int j = 0; j < width; j++)
+        {
+            switch (randMain.Next(0, 2))
+            {
+                case 0:
+                    Instantiate(RockWall1, new Vector3(j * cellSize - maxWidth, 0, (maxHeight - cellSize / 2)), Quaternion.identity);
+                    break;
+                case 1:
+                    Instantiate(RockWall2, new Vector3(j * cellSize - maxWidth, 0, (maxHeight - cellSize / 2)), Quaternion.identity);
+                    break;
+            }
+
+        }
+        for (int j = 0; j < height; j++)
+        {
+            switch (randMain.Next(0, 2))
+            {
+                case 0:
+                    Instantiate(RockWall1, new Vector3(-(maxWidth + cellSize / 2), 0, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
+                    break;
+                case 1:
+                    Instantiate(RockWall2, new Vector3(-(maxWidth + cellSize / 2), 0, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
+                    break;
+            }
+        }
+        for (int j = 0; j < height; j++)
+        {
+            switch (randMain.Next(0, 2))
+            {
+                case 0:
+                    Instantiate(RockWall1, new Vector3((maxWidth - cellSize / 2), 0, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
+                    break;
+                case 1:
+                    Instantiate(RockWall2, new Vector3((maxWidth - cellSize / 2), 0, j * cellSize - maxHeight), Quaternion.Euler(0f, 90f, 0f));
+                    break;
+            }
+        }
+    }
 }
