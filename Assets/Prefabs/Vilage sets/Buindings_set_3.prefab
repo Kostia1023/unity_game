@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4068655217676095797}
   - component: {fileID: 4005446991358787587}
   - component: {fileID: 1171916260792518309}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_chair_01b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - component: {fileID: 3873723178428701539}
   - component: {fileID: 8165119943203525606}
   - component: {fileID: 5163661382217769662}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_table_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 8429607829674371081}
   - component: {fileID: 6970620764394773953}
   - component: {fileID: 1602093327202312778}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_wagon_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 4884675725059508791}
   - component: {fileID: 2121515391494338209}
   - component: {fileID: 1340519848427388709}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_barrel_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 6053519305983515086}
   - component: {fileID: 4686957715722968996}
   - component: {fileID: 9036856166880520455}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rpgpp_lt_tree_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 5633325512193211378}
   - component: {fileID: 4182899186282601256}
   - component: {fileID: 4834509331746940772}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_chair_01a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 2120162158073532587}
   - component: {fileID: 1820020569441111072}
   - component: {fileID: 6540204252118670694}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rpgpp_lt_tree_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 5387003413411742401}
   - component: {fileID: 6532941815512065862}
   - component: {fileID: 191295031575767054}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_rock_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -829,7 +829,7 @@ GameObject:
   - component: {fileID: 2760224316139537755}
   - component: {fileID: 148253694158426698}
   - component: {fileID: 6639079193427523547}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_chair_01a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -926,7 +926,7 @@ GameObject:
   - component: {fileID: 3788821593424698891}
   - component: {fileID: 5105979085578242446}
   - component: {fileID: 7654573607392100777}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_building_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}

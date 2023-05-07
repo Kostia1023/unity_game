@@ -94,8 +94,8 @@ public class GenerateMap : MonoBehaviour
     public int minCountEnemyInCell = 4;
     public int maxCountChestInCell = 4;
     public int minCountChestInCell = 1;
-    public int maxCountTreeInCell = 6;
-    public int minCountTreeInCell = 15;
+    public int minCountTreeInCell = 6;
+    public int maxCountTreeInCell = 15;
     public LayerMask checkLayerForGrass;
 
     private void Start()
@@ -333,20 +333,20 @@ public class GenerateMap : MonoBehaviour
 
                 if (isPossiblePlace(treesPos, pos, 5))
                 {
-                    enemyPrefab = null;
+                    GameObject tree = null;
                     switch (randMain.Next(0, 3))
                     {
                         case 0:
-                            enemyPrefab = Instantiate(TreePrefab1, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                            tree = Instantiate(TreePrefab1, new Vector3(position[0], 0, position[1]), Quaternion.identity);
                             break;
                         case 1:
-                            enemyPrefab = Instantiate(TreePrefab2, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                            tree = Instantiate(TreePrefab2, new Vector3(position[0], 0, position[1]), Quaternion.identity);
                             break;
                         case 2:
-                            enemyPrefab = Instantiate(TreePrefab3, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                            tree = Instantiate(TreePrefab3, new Vector3(position[0], 0, position[1]), Quaternion.identity);
                             break;
                     }
-                    Instantiate(enemyPrefab, new Vector3(
+                    Instantiate(tree, new Vector3(
                         pos[0],
                         1,
                         pos[1]

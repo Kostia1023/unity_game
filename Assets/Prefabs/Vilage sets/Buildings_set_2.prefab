@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1312940022835006964}
   - component: {fileID: 351959723711964002}
   - component: {fileID: 5948951024085113400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_building_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 1974026125331819893}
   - component: {fileID: 8890034707968719808}
   - component: {fileID: 1962276311754110015}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_log_wood_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 4531726490713365355}
   - component: {fileID: 6860571815367712203}
   - component: {fileID: 4190372559220907080}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_wood_path_01a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 9052337191967047174}
   - component: {fileID: 5868671202307891632}
   - component: {fileID: 1304571984857135493}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rpgpp_lt_tree_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 3517301569470944036}
   - component: {fileID: 9143581189752748025}
   - component: {fileID: 8763513181831731370}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rpgpp_lt_building_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
