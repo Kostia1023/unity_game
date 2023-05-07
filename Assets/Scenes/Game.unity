@@ -894,8 +894,8 @@ MonoBehaviour:
   cellNoneMaterial: {fileID: 2100000, guid: 7aa8c8d1ffd54e94895834366fb18bd6, type: 2}
   cellPlayerMaterial: {fileID: 2100000, guid: 7aa8c8d1ffd54e94895834366fb18bd6, type: 2}
   cellChestMaterial: {fileID: 2100000, guid: 7aa8c8d1ffd54e94895834366fb18bd6, type: 2}
-  cellHomesMaterial: {fileID: 2100000, guid: 9ae1d73fdebd4f04f971f7144044b8c3, type: 2}
-  cellForestMaterial: {fileID: 2100000, guid: 7aa8c8d1ffd54e94895834366fb18bd6, type: 2}
+  cellHomesMaterial: {fileID: 2100000, guid: 40cc89b9c27c19c459d15b79d4211bee, type: 2}
+  cellForestMaterial: {fileID: 2100000, guid: 40cc89b9c27c19c459d15b79d4211bee, type: 2}
   seed: 1
   noneWeight: 9
   enemyWeight: 2
@@ -905,5 +905,35 @@ MonoBehaviour:
   playerPrefab: {fileID: 4179894858537481529, guid: d506ad70affbb8a4b88c7acbe1f9a105, type: 3}
   enemyPrefab: {fileID: 1090219386143568, guid: a817c29ea6847604bb2c6c51d9a74bf1, type: 3}
   chestPrefab: {fileID: 6604398403984369772, guid: 07f9fbf665ac5474dbc0ac26d35d7c8c, type: 3}
-  sizeWorld: 2
+  HomesPrefab1: {fileID: 6215240523811389672, guid: e210de231b5c82d43bea4b29dcf0535f, type: 3}
+  HomesPrefab2: {fileID: 5174281225127138530, guid: 5a741891b36a0264283f605ac345c0ef, type: 3}
+  HomesPrefab3: {fileID: 790945637623410771, guid: 3aa5a8d65897b2d4ab81ee53ebcbd4df, type: 3}
+  TreePrefab1: {fileID: 1612273161005096, guid: ae9772ea62bbc724eb9b8ef81109f733, type: 3}
+  TreePrefab2: {fileID: 1458573784885960, guid: 6910e2407cd484a42a0c2598114751a0, type: 3}
+  TreePrefab3: {fileID: 1369031296425274, guid: 22a3fd8d3e59a1149bdcd775c0e87241, type: 3}
+  GrassPrefab1: {fileID: 1435283653269720, guid: 00e2e59cbc04eab4a982218df54ce70b, type: 3}
+  GrassPrefab2: {fileID: 1733909988577898, guid: e88b7bb02ae149940a5a0cddf34fe370, type: 3}
+  FlowerPrefab1: {fileID: 1046453777464574, guid: 1aad01ae01d836647b215e40f1f4c1a7, type: 3}
+  FlowerPrefab2: {fileID: 1269754475505960, guid: 186ecc7a1f977cc4fab5658c00fa3c4d, type: 3}
+  FlowerPrefab3: {fileID: 1143931805411576, guid: f71e980e020ab924ebed9a227a648ec8, type: 3}
+  PlantsPrefab1: {fileID: 1157028143247034, guid: 5286e490afadac545ae3a1595b1e96e1, type: 3}
+  PlantsPrefab2: {fileID: 1998486184958212, guid: e85c18dfba00c9540859ea847782af5b, type: 3}
+  RockWall1: {fileID: 0}
+  RockWall2: {fileID: 0}
+  sizeWorld: 1
   cellSize: 50
+  smallSizeWidth: 10
+  smallSizeHeight: 10
+  mediumSizeWidth: 15
+  mediumSizeHeight: 15
+  bigSizeWidth: 20
+  bigSizeHeight: 20
+  maxCountEnemyInCell: 10
+  minCountEnemyInCell: 4
+  maxCountChestInCell: 4
+  minCountChestInCell: 1
+  minCountTreeInCell: 6
+  maxCountTreeInCell: 15
+  checkLayerForGrass:
+    serializedVersion: 2
+    m_Bits: 0
