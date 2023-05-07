@@ -5,41 +5,47 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public Slider healthSlider;
-    public GameObject MoveObj;
+    public float maxHealth = 100; // Максимальне здоров'я гравця
+    public Slider healthSlider; // Слайдер здоров'я
 
-    private float health = 100f;
-    private float maxHeath = 100f;
-    private float timeInvulnerability = 0.5f;
-    private float lastTakedDamage = 0;
-    void Start()
+    private float currentHealth; // Поточне здоров'я гравця
+    private bool canTakeDamage = true; // Можливість отримання урону
+
+    private void Start()
     {
-
-       // healthSlider.value = 1f;
+        currentHealth = maxHealth;
+        UpdateHealthUI();
     }
 
-    void FixedUpdate()
+    public void TakeDamage(float damageAmount)
     {
-        //healthSlider.value = GetPlayerHealth();
-        //if (Time.time - lastTakedDamage > timeInvulnerability)
-        //{
-            
-        //    lastTakedDamage = Time.time;
-        //}
+        if (canTakeDamage)
+        {
+            currentHealth -= damageAmount;
+            UpdateHealthUI();
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+
+            canTakeDamage = false;
+            Invoke("EnableDamage", 1f); // Затримка у 1 секунду перед можливістю отримання наступного урону
+        }
     }
 
-    void getAttacked(Attack attack)
+    private void Die()
     {
-
+        // Виконайте дії, пов'язані зі смертю гравця тут
     }
 
-    float GetPlayerHealth()
+    private void UpdateHealthUI()
     {
-        return health / maxHeath;
+        healthSlider.value = currentHealth/ maxHealth;
     }
 
-    void Dead()
+    private void EnableDamage()
     {
-
+        canTakeDamage = true;
     }
 }

@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 95471671811264702}
   - component: {fileID: 7152584563483144844}
   - component: {fileID: -724269286153305434}
+  - component: {fileID: -7002041325064907098}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -108,6 +109,8 @@ MonoBehaviour:
   Speed: 6
   radius: 40
   targetTag: Player
+  minPauseTime: 3
+  maxPauseTime: 8
   characterController: {fileID: -724269286153305434}
 --- !u!143 &-724269286153305434
 CharacterController:
@@ -127,6 +130,30 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-7002041325064907098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090219386143568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fa389d8e5235e4c98f6e7397192dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  knockback: 0
+  periodicDamage: 0
+  timeFreeze: 0
+  buffDamage: 0
+  buffPeriodicDamage: 0
+  weakness: 0
+  slowdownPower: 0
+  slowdownTime: 0
+  debuffType: 0
+  attackRadius: 3
+  damageAmount: 3
 --- !u!1 &1159745215084782
 GameObject:
   m_ObjectHideFlags: 0

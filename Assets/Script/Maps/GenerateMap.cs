@@ -23,7 +23,6 @@ public class GenerateMap : MonoBehaviour
     [SerializeField]
     private int seed = 1122;
 
-
     //Weight
     [SerializeField]
     private int noneWeight = 9;
@@ -44,11 +43,9 @@ public class GenerateMap : MonoBehaviour
     [SerializeField]
     public GameObject chestPrefab;
 
-
     //Rand
     System.Random randMain;
     System.Random random = new System.Random();
-
 
     //Size
     public WorldSize sizeWorld;
@@ -169,6 +166,7 @@ public class GenerateMap : MonoBehaviour
         GameObject player = Instantiate(playerPrefab, new Vector3(widthPos * cellSize - maxWidth, 1, heightPos * cellSize - maxHeight), Quaternion.identity);
         player.GetComponent<ThirdPersonMove>().cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>().target = player.transform;
+        player.GetComponent<PlayerHealth>().healthSlider = GameObject.FindGameObjectWithTag("PlayerHPSlider").GetComponent<UnityEngine.UI.Slider>();
     }
 
     void CreateEnemyCell(int widthPos, int heightPos)
