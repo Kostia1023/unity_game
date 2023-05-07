@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MoveController
 {
-    public float radius;
-    public string targetTag;
+    public float radius = 10;
+    public string targetTag = "Player";
 
     private GameObject target;
 
@@ -18,7 +18,6 @@ public class EnemyMovement : MoveController
     {
         if (target == null)
         {
-
             // Find player with target tag
             GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
             foreach (GameObject potentialTarget in targets)
@@ -47,12 +46,12 @@ public class EnemyMovement : MoveController
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Attack attack = gameObject.GetComponent<EnemyAttack>();
-            attack.ToAttack(other.gameObject.GetComponent<HP>());
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("Player"))
+    //    {
+    //        Attack attack = gameObject.GetComponent<EnemyAttack>();
+    //        attack.ToAttack(other.gameObject.GetComponent<HP>());
+    //    }
+    //}
 }
