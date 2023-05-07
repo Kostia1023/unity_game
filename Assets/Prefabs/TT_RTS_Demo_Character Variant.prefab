@@ -895,6 +895,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4179894858527828341}
+  attackRange: 2
+  attackDamage: 10
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &170346360
 MonoBehaviour:
   m_ObjectHideFlags: 0
