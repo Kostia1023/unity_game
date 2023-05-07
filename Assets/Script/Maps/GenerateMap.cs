@@ -21,7 +21,7 @@ public class GenerateMap : MonoBehaviour
     [SerializeField]
     public Material cellForestMaterial;
     [SerializeField]
-    private int seed = 1122;
+    private int seed = 1;
 
     //Weight
     [SerializeField]
@@ -37,11 +37,38 @@ public class GenerateMap : MonoBehaviour
 
     //Prefabs
     [SerializeField]
-    public GameObject playerPrefab;
+    GameObject playerPrefab;
     [SerializeField]
-    public GameObject enemyPrefab;
+    GameObject enemyPrefab;
     [SerializeField]
-    public GameObject chestPrefab;
+    GameObject chestPrefab;
+    [SerializeField]
+    GameObject HomesPrefab1;
+    [SerializeField]
+    GameObject HomesPrefab2;
+    [SerializeField]
+    GameObject HomesPrefab3;
+    [SerializeField]
+    GameObject TreePrefab1;
+    [SerializeField]
+    GameObject TreePrefab2;
+    [SerializeField]
+    GameObject TreePrefab3;
+    [SerializeField]
+    GameObject GrassPrefab1;
+    [SerializeField]
+    GameObject GrassPrefab2;
+    [SerializeField]
+    GameObject FlowerPrefab1;
+    [SerializeField]
+    GameObject FlowerPrefab2;
+    [SerializeField]
+    GameObject FlowerPrefab3;
+    [SerializeField]
+    GameObject PlantsPrefab1;
+    [SerializeField]
+    GameObject PlantsPrefab2;
+
 
     //Rand
     System.Random randMain;
@@ -52,21 +79,24 @@ public class GenerateMap : MonoBehaviour
 
     public int cellSize = 25;
 
-    private int smallSizeWidth = 10;
-    private int smallSizeHeight = 10;
-    private int mediumSizeWidth = 15;
-    private int mediumSizeHeight = 15;
-    private int bigSizeWidth = 15;
-    private int bigSizeHeight = 15;
+    public int smallSizeWidth = 10;
+    public int smallSizeHeight = 10;
+    public int mediumSizeWidth = 15;
+    public int mediumSizeHeight = 15;
+    public int bigSizeWidth = 20;
+    public int bigSizeHeight = 20;
 
     private float maxWidth;
     private float maxHeight;
 
     //World params
-    private int maxCountEnemyInCell = 10;
-    private int minCountEnemyInCell = 4;
-    private int maxCountChestInCell = 4;
-    private int minCountChestInCell = 1;
+    public int maxCountEnemyInCell = 10;
+    public int minCountEnemyInCell = 4;
+    public int maxCountChestInCell = 4;
+    public int minCountChestInCell = 1;
+    public int maxCountTreeInCell = 6;
+    public int minCountTreeInCell = 15;
+    public LayerMask checkLayerForGrass;
 
     private void Start()
     {
@@ -157,6 +187,7 @@ public class GenerateMap : MonoBehaviour
                 }
             }
         }
+        CreateGrassAndFlowers(width, height);
     }
 
     void CreatePlayerCell(int widthPos, int heightPos)
@@ -191,7 +222,7 @@ public class GenerateMap : MonoBehaviour
                     randMain.Next(Convert.ToInt32(enemysCenterPos[1] - i), Convert.ToInt32(enemysCenterPos[1] + i))
                 };
 
-                if (isPossiblePlace(enemysPos, pos))
+                if (isPossiblePlace(enemysPos, pos, 2))
                 {
                     Instantiate(enemyPrefab, new Vector3(
                         pos[0],
@@ -206,11 +237,11 @@ public class GenerateMap : MonoBehaviour
         }
     }
 
-    bool isPossiblePlace(List<int[]> positions, int[] position)
+    bool isPossiblePlace(List<int[]> positions, int[] position, int minDistance)
     {
         foreach (int[] pos in positions)
         {
-            if ((position[0] + 2 >= pos[0] && position[0] - 2 <= pos[0]) && (position[1] + 2 >= pos[1] && position[1] - 2 <= pos[1]))
+            if ((position[0] + minDistance >= pos[0] && position[0] - minDistance <= pos[0]) && (position[1] + minDistance >= pos[1] && position[1] - minDistance <= pos[1]))
             {
                 return false;
             }
@@ -224,7 +255,7 @@ public class GenerateMap : MonoBehaviour
         cube.GetComponent<Renderer>().material = cellChestMaterial;
         int numberChests = randMain.Next(minCountChestInCell, maxCountChestInCell + 1);
         int R = randMain.Next(4, 9);
-        int Deg = randMain.Next(120, 360);
+        int Deg = randMain.Next(200, 360);
         PlaceChest(numberChests, R, Deg, new Vector3(position[0], 0, position[1]));
 
     }
@@ -263,14 +294,124 @@ public class GenerateMap : MonoBehaviour
     {
         GameObject cube = createDemoCube(widthPos, heightPos, out float[] position);
         cube.GetComponent<Renderer>().material = cellHomesMaterial;
-        Homes homes = new();
-        homes.Create(position, cellSize, randMain);
+        switch (randMain.Next(0, 3))
+        {
+            case 0:
+                Instantiate(HomesPrefab1, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                break;
+            case 1:
+                Instantiate(HomesPrefab2, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(HomesPrefab3, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                break;
+        }
+
     }
     void CreateForestCell(int widthPos, int heightPos)
     {
         GameObject cube = createDemoCube(widthPos, heightPos, out float[] position);
         cube.GetComponent<Renderer>().material = cellForestMaterial;
-        Forest forest = new();
-        forest.Create(position, cellSize, randMain);
+
+        int numberTrees = randMain.Next(minCountTreeInCell, maxCountTreeInCell + 1);
+        int[] TreesCenterPos = {
+            randMain.Next(Convert.ToInt32(position[0] - cellSize / 2 + 10), Convert.ToInt32(position[0] + cellSize / 2 - 10)),
+            randMain.Next(Convert.ToInt32(position[1] - cellSize / 2 + 10), Convert.ToInt32(position[1] + cellSize / 2 - 10)),
+        };
+
+        List<int[]> treesPos = new List<int[]>();
+
+        for (int i = 7; i < numberTrees + 7; i++)
+        {
+
+            while (true)
+            {
+                int[] pos = new int[] {
+                    randMain.Next(Convert.ToInt32(TreesCenterPos[0] - i), Convert.ToInt32(TreesCenterPos[0] + i)),
+                    randMain.Next(Convert.ToInt32(TreesCenterPos[1] - i), Convert.ToInt32(TreesCenterPos[1] + i))
+                };
+
+                if (isPossiblePlace(treesPos, pos, 5))
+                {
+                    enemyPrefab = null;
+                    switch (randMain.Next(0, 3))
+                    {
+                        case 0:
+                            enemyPrefab = Instantiate(TreePrefab1, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                            break;
+                        case 1:
+                            enemyPrefab = Instantiate(TreePrefab2, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                            break;
+                        case 2:
+                            enemyPrefab = Instantiate(TreePrefab3, new Vector3(position[0], 0, position[1]), Quaternion.identity);
+                            break;
+                    }
+                    Instantiate(enemyPrefab, new Vector3(
+                        pos[0],
+                        1,
+                        pos[1]
+                        ), Quaternion.identity);
+                    treesPos.Add(pos);
+                    break;
+                }
+            }
+
+        }
     }
+
+    void CreateGrassAndFlowers(int width, int height)
+    {
+        for (int i = 0; i < width * cellSize-2; i += 2)
+        {
+            for (int j = 0; j < height * cellSize-3; j += 3)
+            {
+                if (!CheckPlacement()) { continue; }
+                Vector3 position = new Vector3(
+                    (float)randMain.NextDouble() * 2 + i - maxWidth, 
+                    0,
+                    (float)randMain.NextDouble() * 3 + j - maxHeight);
+                switch (randMain.Next(0, 15))
+                {
+                    case 0:
+                        Instantiate(GrassPrefab1, position, Quaternion.identity);
+                        break;
+                    case 1:
+                        Instantiate(GrassPrefab2, position, Quaternion.identity);
+                        break;
+                    case 2:
+                        Instantiate(FlowerPrefab1, position, Quaternion.identity);
+                        break;
+                    case 3:
+                        Instantiate(FlowerPrefab2, position, Quaternion.identity);
+                        break;
+                    case 4:
+                        Instantiate(FlowerPrefab3, position, Quaternion.identity);
+                        break;
+                    case 5:
+                        Instantiate(PlantsPrefab2, position, Quaternion.identity);
+                        break;
+                    case 6:
+                        Instantiate(PlantsPrefab2, position, Quaternion.identity);
+                        break;
+                    default: break;
+                }
+            }
+
+        }
+    }
+
+    private bool CheckPlacement()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1, checkLayerForGrass);
+
+        if (colliders.Length > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
 }
