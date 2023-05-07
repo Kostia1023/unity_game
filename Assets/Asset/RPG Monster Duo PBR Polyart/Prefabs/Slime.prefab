@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  anim: {fileID: 95471671811264702}
 --- !u!1 &1159745215084782
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,8 +6,8 @@ public class AttackScript : MonoBehaviour
 {
     public Animator anim;
 
-    public float attackRange = 3f; 
-    public int attackDamage = 10;
+    public float attackRange = 5f; 
+    public int attackDamage = 15;
     public LayerMask enemyLayer;
 
     private bool canAttack = true; 
@@ -15,6 +15,10 @@ public class AttackScript : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         if (Input.GetMouseButtonDown(0) && canAttack)
         {
             anim.SetTrigger("attack");

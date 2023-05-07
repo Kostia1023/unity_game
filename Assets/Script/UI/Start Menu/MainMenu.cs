@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -28,6 +29,7 @@ public class MainMenu : MonoBehaviour
         exitButton.onClick.AddListener(Exit);
         backToStartButton.onClick.AddListener(BackToStartMenu);
         createButton.onClick.AddListener(CreatePlayer);
+        GameData.Save("player1", 1);
     }
 
     void Exit()
@@ -65,6 +67,9 @@ public class MainMenu : MonoBehaviour
                 player.SetActive(true);
                 player.transform.SetParent(selectPlayerPanel.transform, false);
                 player.transform.localPosition = new Vector3(-2, 50 - 80 * i);
+                UnityEngine.UI.Button button = player.GetComponent<UnityEngine.UI.Button>();
+                button.onClick.AddListener(Play);
+
             }
             else
             {
@@ -85,5 +90,10 @@ public class MainMenu : MonoBehaviour
         GameData.Save<PlayerInfo>("player" + playerIndex, new PlayerInfo(playerName.text));
         createPlayerPanel.SetActive(false);
         StartGame();
+    }
+
+    void Play()
+    {
+        SceneManager.LoadScene("Game");
     }
 }

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public float maxHealth = 20; 
+    public float maxHealth = 20;
 
     private float currentHealth;
-    private bool canTakeDamage = true; 
+
+    public Animator anim;
 
     private void Start()
     {
@@ -16,27 +17,22 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        if (canTakeDamage)
+
+        currentHealth -= damageAmount;
+
+        if (currentHealth <= 0)
         {
-            currentHealth -= damageAmount;
-
-            if (currentHealth <= 0)
-            {
-                Die();
-            }
-
-            canTakeDamage = false;
-            Invoke("EnableDamage", 1f);
+            StartCoroutine(Die());
         }
+
     }
 
-    private void Die()
+    private System.Collections.IEnumerator Die()
     {
+        yield return new WaitForSeconds(0.3f);
+        anim.SetTrigger("Die");
+        yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
     }
 
-    private void EnableDamage()
-    {
-        canTakeDamage = true;
-    }
 }

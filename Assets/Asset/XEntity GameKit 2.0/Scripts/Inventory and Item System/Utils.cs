@@ -222,44 +222,32 @@ namespace XEntity.InventoryItemSystem
         }
 
         //Finds the interaction settings asset in the editor. Returns null if none is found.
-        public static InteractionSettings FindInteractionSettings() 
+        public static InteractionSettings FindInteractionSettings()
         {
             InteractionSettings settings = null;
 
-            if (Application.isPlaying == false)
+            if (Application.isPlaying)
             {
-#if UNITY_EDITOR
-                var settingsAssets = AssetDatabase.FindAssets($"t:{nameof(InteractionSettings)}");
-                if (settingsAssets?.Length > 0)
+                InteractionSettings[] foundSettings = Resources.FindObjectsOfTypeAll<InteractionSettings>();
+                if (foundSettings.Length > 0)
                 {
-                    string assetPath = AssetDatabase.GUIDToAssetPath(settingsAssets[0]);
-                    settings = AssetDatabase.LoadAssetAtPath(assetPath, typeof(InteractionSettings)) as InteractionSettings;
-                }
-#endif
-            }
-            else 
-            {
-                string[] assetGUIDs = AssetDatabase.FindAssets($"t:{nameof(InteractionSettings)}");
-                string assetPath = "";
-                foreach (string guid in assetGUIDs)
-                {
-                    string path = AssetDatabase.GUIDToAssetPath(guid);
-                    if (Path.GetExtension(path).Equals(".asset")) // Replace with the appropriate file extension
-                    {
-                        assetPath = path;
-                        break;
-                    }
-                }
-
-                if (!string.IsNullOrEmpty(assetPath))
-                {
-                    InteractionSettings _interactionSettings = AssetDatabase.LoadAssetAtPath<InteractionSettings>(assetPath);
-                    settings = _interactionSettings;
+                    settings = foundSettings[0];
                 }
                 else
                 {
                     Debug.LogError("Could not find asset with name 'InteractionSettings'");
                 }
+            }
+            else
+            {
+#if UNITY_EDITOR
+                var settingsAssets = UnityEditor.AssetDatabase.FindAssets($"t:{nameof(InteractionSettings)}");
+                if (settingsAssets?.Length > 0)
+                {
+                    string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(settingsAssets[0]);
+                    settings = UnityEditor.AssetDatabase.LoadAssetAtPath(assetPath, typeof(InteractionSettings)) as InteractionSettings;
+                }
+#endif
             }
 
             return settings;
