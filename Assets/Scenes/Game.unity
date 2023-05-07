@@ -918,8 +918,6 @@ MonoBehaviour:
   FlowerPrefab3: {fileID: 1143931805411576, guid: f71e980e020ab924ebed9a227a648ec8, type: 3}
   PlantsPrefab1: {fileID: 1157028143247034, guid: 5286e490afadac545ae3a1595b1e96e1, type: 3}
   PlantsPrefab2: {fileID: 1998486184958212, guid: e85c18dfba00c9540859ea847782af5b, type: 3}
-  RockWall1: {fileID: 0}
-  RockWall2: {fileID: 0}
   sizeWorld: 1
   cellSize: 50
   smallSizeWidth: 10
