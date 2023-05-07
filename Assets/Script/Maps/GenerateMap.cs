@@ -195,7 +195,7 @@ public class GenerateMap : MonoBehaviour
 
                 if (isPossiblePlace(enemysPos, pos))
                 {
-                    Instantiate(playerPrefab, new Vector3(
+                    Instantiate(enemyPrefab, new Vector3(
                         pos[0],
                         1,
                         pos[1]
